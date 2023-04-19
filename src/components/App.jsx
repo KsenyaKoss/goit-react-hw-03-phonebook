@@ -4,8 +4,6 @@ import { Contacts } from './Contacts/ContactsList';
 import { nanoid } from 'nanoid';
 import { Filter } from './Filter/Filter';
 
-const CONTACTS_KEY = 'contacts_key';
-
 export class App extends Component {
   state = {
     contacts: [
@@ -18,16 +16,13 @@ export class App extends Component {
   };
 
   componentDidMount() {
-    const data = localStorage.getItem('CONTACTS_KEY ');
+    const data = localStorage.getItem('contacts_key');
     data?.length && this.setState({ contacts: JSON.parse(data) });
   }
 
   componentDidUpdate(_, prevState) {
     if (prevState.contacts.length !== this.state.contacts.length) {
-      localStorage.setItem(
-        'CONTACTS_KEY ',
-        JSON.stringify(this.state.contacts)
-      );
+      localStorage.setItem('contacts_key', JSON.stringify(this.state.contacts));
     }
   }
 
